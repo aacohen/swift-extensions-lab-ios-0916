@@ -24,20 +24,31 @@ extension String {
 
 extension String {
     var pigLatin: String {
-        var stringCharacters: [Character] = []
-        for character in self.characters {
+        
+        let separateWords = self.components(separatedBy: " ")
+        print("sentence separted into array of words \(separateWords)")
+        var finalString = ""
+        
+        for word in separateWords {
+          var stringCharacters: [Character] = []
+        
+        for character in word.characters {
+            
             stringCharacters.append(character)
         }
+            let firstCharacter = stringCharacters[0]
+            stringCharacters.remove(at: 0)
+            stringCharacters.append(firstCharacter)
+            var fullWord = String(stringCharacters)
+            fullWord.append("ay ")
+            finalString.append(fullWord)
+            
+        }
+        let correctString = finalString.lowercased()
+        let final = correctString.capitalized
+    let trimmedString = final.trimmingCharacters(in: .whitespaces)
         
-        let firstCharacter = stringCharacters[0]
-        stringCharacters.remove(at: 0)
-        stringCharacters.append(firstCharacter)
-        
-        var charString = String(stringCharacters)
-        
-        charString.append("ay")
-        
-        return charString
+        return trimmedString
     }
 }
 
@@ -97,8 +108,8 @@ extension Int {
 extension String {
     var unicornLevel: String {
         var unicornString = ""
-    
-        for char in self.characters {
+   var noSpaceString = self.replacingOccurrences(of: " ", with: "")
+        for char in noSpaceString.characters {
         unicornString.append("🦄")
         }
         return unicornString
